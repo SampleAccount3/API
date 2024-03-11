@@ -29,14 +29,40 @@ public class MainActivity extends AppCompatActivity {
                 .build();
 
         jsonPlaceholderAPI = retrofit.create(JsonPlaceholderAPI.class);
-        getPost();
+//        getPost();
 //        getComments();
+        getResult();
+    }
+
+    private void getResult() {
+        Call<TimeStamp> call = jsonPlaceholderAPI.getResult();
+
+        call.enqueue(new Callback<TimeStamp>() {
+            @Override
+            public void onResponse(Call<TimeStamp> call, Response<TimeStamp> response) {
+                if (!response.isSuccessful()){
+                    tvResult.setText("Code: " + response.code());
+                    return;
+                }
+                TimeStamp time = response.body();
+
+                    String content = "";
+                    content += "valid: " + time.getIsValidTime();
+                    tvResult.append(content);
+            }
+
+            @Override
+            public void onFailure(Call<TimeStamp> call, Throwable t) {
+                tvResult.setText(t.getMessage());
+            }
+
+        });
     }
 
     private void getPost() {
 
         // getting the response from the API
-        Call<List<Post>> call = jsonPlaceholderAPI.getPosts(4);
+        Call<List<Post>> call = jsonPlaceholderAPI.getPosts2(10,"id","desc");
 
         call.enqueue(new Callback<List<Post>>() {
             @Override
