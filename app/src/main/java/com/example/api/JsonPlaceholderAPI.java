@@ -22,10 +22,13 @@ public interface JsonPlaceholderAPI {
             @Query("_order") String order
     );
 
-    @GET("http://192.168.1.62:88/Wilcon.TSSS.Tablet/Request.aspx?function=validatetimestamp&unix=1709608596")
+//    @GET("http://192.168.1.62:88/Wilcon.TSSS.Tablet/Request.aspx?function=validatetimestamp&unix={secs}")
+    @GET("http://192.168.1.62:88/Wilcon.TSSS.Tablet/Request.aspx")
     Call<TimeStamp> getResult(
-//            @Query("secs") int seconds
+            @Query("function") String function,
+            @Query("unix") int unix
     );
+
 
 
 

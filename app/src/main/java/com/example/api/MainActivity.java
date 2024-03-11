@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getResult() {
-        Call<TimeStamp> call = jsonPlaceholderAPI.getResult();
+        Call<TimeStamp> call = jsonPlaceholderAPI.getResult("validatetimestamp",1709608596);
 
         call.enqueue(new Callback<TimeStamp>() {
             @Override
